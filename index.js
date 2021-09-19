@@ -1,17 +1,28 @@
 document.querySelector("button").addEventListener("click", () => {
-    var birthYear = prompt("What year were you born... Good Friend?");
+    if (document.querySelector("#ageInDays") === null) {
+        var birthYear = prompt("What year were you born... Good Friend?");
+        while (isNaN(birthYear) || birthYear === '') {
+            var birthYear = prompt("What year were you born... Good Friend?", "Must enter an year");
+        };
 
-    while (isNaN(birthYear)) {
-        var birthYear = prompt("What year were you born... Good Friend?", "Must enter an year");
-    };
+        console.log(birthYear);
 
-    var date = new Date();
-    var ageInDays = (date.getFullYear() - birthYear) * 365;
-    var result = document.createElement('h1');
-    result.setAttribute("id", "ageInDays");
-    var textAnswer = document.createTextNode("You are " + ageInDays + " days old.");
-    result.appendChild(textAnswer);
-    document.getElementById("flex-box-result").appendChild(result);
+        if (document.querySelector("#ageInDays") === null) {
+            if (isFinite(birthYear) && !(birthYear === null)) {
+                var date = new Date();
+                var ageInDays = (date.getFullYear() - birthYear) * 365;
+                var result = document.createElement('h1');
+                result.setAttribute("id", "ageInDays");
+                var textAnswer = document.createTextNode("You are " + ageInDays + " days old.");
+                result.appendChild(textAnswer);
+                document.getElementById("flex-box-result").appendChild(result);
+            }
+        }
+
+    } else {
+        alert("Reset the previous one!");
+    }
+
 
 });
 
