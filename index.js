@@ -51,25 +51,21 @@ document.querySelector("#generate-cat-button").addEventListener('click', () => {
 
 var rpsImage = document.querySelectorAll(".flex-box-rps img");
 
-getYourChoice();
-
-function getYourChoice() {
-    for (var i = 0; i < rpsImage.length; i++){
-        rpsImage[i].addEventListener("click", (e) => {
-            console.log(e.path[0].id);
-            var yourChoice = e.path[0].id;
-            rpsGame(yourChoice);
-        })
-    }
+for (var i = 0; i < rpsImage.length; i++) {
+    rpsImage[i].addEventListener("click", (e) => {
+        console.log("id - " + e.path[0].id);
+        var yourChoice = e.path[0].id;
+        rpsGame(yourChoice);
+    })
 }
 
-function rpsGame(yourChoice){
+function rpsGame(yourChoice) {
     botChoice = randomSelection();
     result = decideWinner(yourChoice, botChoice);
     rpsFrontEnd(yourChoice, botChoice, result);
 }
 
-function randomSelection(){
+function randomSelection() {
     randomNum = Math.floor((Math.random() + 1) * 3);
     console.log("random number - " + randomNum);
 
@@ -86,16 +82,16 @@ function randomSelection(){
 }
 
 
-function decideWinner(yourChoice, botChoice){
-    if(yourChoice === "rock-img" && botChoice === "paper-img" || yourChoice === "paper-img" && botChoice === "scissor-img" || yourChoice === "scissor-img" && botChoice === "rock-img"){
+function decideWinner(yourChoice, botChoice) {
+    if (yourChoice === "rock-img" && botChoice === "paper-img" || yourChoice === "paper-img" && botChoice === "scissor-img" || yourChoice === "scissor-img" && botChoice === "rock-img") {
         return "You Lost!"
-    } else if(yourChoice === "paper-img" && botChoice === "rock-img" || yourChoice === "rock-img" && botChoice === "scissor-img" || yourChoice === "scissor-img" && botChoice === "paper-img"){
+    } else if (yourChoice === "paper-img" && botChoice === "rock-img" || yourChoice === "rock-img" && botChoice === "scissor-img" || yourChoice === "scissor-img" && botChoice === "paper-img") {
         return "Yor Won!";
-    } else{
+    } else {
         return "Tied!";
     }
 }
 
-function rpsFrontEnd(yourChoice, botChoice, result){
+function rpsFrontEnd(yourChoice, botChoice, result) {
     console.log(result)
 }
