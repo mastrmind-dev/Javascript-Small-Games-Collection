@@ -46,3 +46,56 @@ document.querySelector("#generate-cat-button").addEventListener('click', () => {
     });
 
 })
+
+//rock paper scissors
+
+var rpsImage = document.querySelectorAll(".flex-box-rps img");
+
+getYourChoice();
+
+function getYourChoice() {
+    for (var i = 0; i < rpsImage.length; i++){
+        rpsImage[i].addEventListener("click", (e) => {
+            console.log(e.path[0].id);
+            var yourChoice = e.path[0].id;
+            rpsGame(yourChoice);
+        })
+    }
+}
+
+function rpsGame(yourChoice){
+    botChoice = randomSelection();
+    result = decideWinner(yourChoice, botChoice);
+    rpsFrontEnd(yourChoice, botChoice, result);
+}
+
+function randomSelection(){
+    randomNum = Math.floor((Math.random() + 1) * 3);
+    console.log("random number - " + randomNum);
+
+    switch (randomNum) {
+        case 3:
+            return "rock-img";
+        case 4:
+            return "paper-img";
+        case 5:
+            return "scissor-img";
+        default:
+            break;
+    }
+}
+
+
+function decideWinner(yourChoice, botChoice){
+    if(yourChoice === "rock-img" && botChoice === "paper-img" || yourChoice === "paper-img" && botChoice === "scissor-img" || yourChoice === "scissor-img" && botChoice === "rock-img"){
+        return "You Lost!"
+    } else if(yourChoice === "paper-img" && botChoice === "rock-img" || yourChoice === "rock-img" && botChoice === "scissor-img" || yourChoice === "scissor-img" && botChoice === "paper-img"){
+        return "Yor Won!";
+    } else{
+        return "Tied!";
+    }
+}
+
+function rpsFrontEnd(yourChoice, botChoice, result){
+    console.log(result)
+}
