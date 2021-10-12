@@ -47,51 +47,96 @@ document.querySelector("#generate-cat-button").addEventListener('click', () => {
 
 })
 
-//rock paper scissors
+//rock paper scissors/////////////////////////////////////////////////////////////////////////////
 
-var rpsImage = document.querySelectorAll(".flex-box-rps img");
-
-for (var i = 0; i < rpsImage.length; i++) {
-    rpsImage[i].addEventListener("click", (e) => {
-        console.log("id - " + e.path[0].id);
-        var yourChoice = e.path[0].id;
-        rpsGame(yourChoice);
+var rpsImages = document.querySelectorAll(".rps-img");
+for(let i = 0; i < rpsImages.length; i++){
+    rpsImages[i].addEventListener('click', async () => {
+        var s = await removeRpsResult();
+        console.log(s);
+        const humanChoice = rpsImages[i].id;
+        rpsGame(humanChoice);
     })
 }
 
-function rpsGame(yourChoice) {
-    botChoice = randomSelection();
-    result = decideWinner(yourChoice, botChoice);
-    rpsFrontEnd(yourChoice, botChoice, result);
+function rpsGame(humanChoice){
+    var botChoice = decideBotChoice();
+    console.log(botChoice);
+    var winner = decideWinner(botChoice, humanChoice);
+    rpsFrontEnd(humanChoice, botChoice, winner);
 }
 
-function randomSelection() {
-    randomNum = Math.floor((Math.random() + 1) * 3);
-    console.log("random number - " + randomNum);
+function decideBotChoice(){
+    var randomNumber = Math.floor(Math.random() * 3);
+    
+    return ['rock', 'paper', 'scissor'][randomNumber];
+}
 
-    switch (randomNum) {
-        case 3:
-            return "rock-img";
-        case 4:
-            return "paper-img";
-        case 5:
-            return "scissor-img";
-        default:
-            break;
+function decideWinner(botChoice, humanChoice){
+    var gatherBothChoices = {
+        "rock" : {"rock" : .5, "paper" : 0, "scissor" : 1},
+        "paper" : {"rock" : 1, "paper" : .5, "scissor" : 0},
+        "scissor" : {"rock" : 0, "paper" : 1, "scissor" : .5}
+    }
+
+    var decisionScore = gatherBothChoices[humanChoice][botChoice];
+    var resultMessage = isWinner(decisionScore);
+    console.log(resultMessage);
+
+    return resultMessage;
+}
+
+function isWinner(decisionScore){
+    if(decisionScore === 1){
+        return "You Won!";
+    } else if(decisionScore === .5){
+        return "Draw!";
+    } else{
+        return "You Lost!";
     }
 }
 
-
-function decideWinner(yourChoice, botChoice) {
-    if (yourChoice === "rock-img" && botChoice === "paper-img" || yourChoice === "paper-img" && botChoice === "scissor-img" || yourChoice === "scissor-img" && botChoice === "rock-img") {
-        return "You Lost!"
-    } else if (yourChoice === "paper-img" && botChoice === "rock-img" || yourChoice === "rock-img" && botChoice === "scissor-img" || yourChoice === "scissor-img" && botChoice === "paper-img") {
-        return "Yor Won!";
-    } else {
-        return "Tied!";
-    }
+function rpsFrontEnd(humanChoice, botChoice, winner){
+    showHumnChoice(humanChoice);
+    showMessage(winner);
+    showBotChoice(botChoice);
 }
 
-function rpsFrontEnd(yourChoice, botChoice, result) {
-    console.log(result)
+function showHumnChoice(humanChoice){
+    var humanChoiceImg = document.createElement('img');
+    humanChoiceImg.classList.add("col-md-3", "rps-result");
+    humanChoiceImg.setAttribute('src', 'img/' + humanChoice + ".png");
+    document.querySelector(".rps-final-decision").appendChild(humanChoiceImg);
+}
+
+function showBotChoice(botChoice) {
+    var botChoiceImg = document.createElement('img');
+    botChoiceImg.classList.add("col-md-3", "rps-result");
+    botChoiceImg.setAttribute('src', 'img/' + botChoice + ".png");
+    document.querySelector(".rps-final-decision").appendChild(botChoiceImg);
+}
+
+function showMessage(winner){
+    let showResult = document.createElement('div');
+    if(winner === "Draw!"){
+    showResult.innerHTML = "<h2>" + winner +"</h2>"
+    } else{
+    showResult.innerHTML = "<h2>&larr;" + winner +"</h2>"
+    }
+    showResult.classList.add("col-md-3", "rps-result", "result-message");
+    document.querySelector(".rps-final-decision").appendChild(showResult);   
+}
+
+function removeRpsResult() {
+    return new Promise((resolve, reject) => {
+        let rpsImages = document.getElementsByClassName("rps-result");
+        console.log(rpsImages.length + "length")
+        let rpsImagesAmount = rpsImages.length;
+        for(let i = 0; i < rpsImagesAmount; i++){
+            rpsImages[0].remove();
+            console.log(i)
+        }
+
+        resolve("done");
+    })
 }

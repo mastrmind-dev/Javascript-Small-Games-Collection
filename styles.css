@@ -25,14 +25,6 @@
     align-items: center;
 }
 
-
-.flex-box-container-1 div{
-    display: flex;
-    padding: 10px;
-    border: 1px solid black;
-    align-items: center;
-}
-
 #cat-image{
     max-width: 50%;
     height: auto;
@@ -47,4 +39,17 @@
 
 .flex-box-rps img:hover{
     box-shadow: 0px 10px 50px rgba(37, 50, 233, 1);
+}
+
+.rps-result{
+    width: 150px;
+    height: 150px;
+}
+
+.result-message{
+    background: tomato;
+}
+
+.result-message h2{
+    margin: auto;
 }
