@@ -51,11 +51,26 @@ document.querySelector("#generate-cat-button").addEventListener('click', () => {
 
 var rpsImages = document.querySelectorAll(".rps-img");
 for(let i = 0; i < rpsImages.length; i++){
-    rpsImages[i].addEventListener('click', async () => {
+    rpsImages[i].addEventListener('click', async (e) => {
+        await blink(rpsImages[i]);
         var s = await removeRpsResult();
         console.log(s);
         const humanChoice = rpsImages[i].id;
         rpsGame(humanChoice);
+    })
+}
+
+function blink(image) {
+    return new Promise((resolve, reject) => {
+        let rpsImage = document.getElementsByClassName('shadowBlue')[0];
+        rpsImage.classList.remove("shadowBlue");
+        image.className = "clicked";
+        setTimeout(() => {
+            rpsImage.classList.add("shadowBlue");
+            image.classList.remove("clicked");
+        }, 200);
+        
+        resolve ("done");
     })
 }
 
