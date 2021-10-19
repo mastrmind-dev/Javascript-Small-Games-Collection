@@ -155,3 +155,26 @@ function removeRpsResult() {
         resolve("done");
     })
 }
+
+//Change the button color challenge///////////////////////////////////////////////////////////////////////////////////////////////////
+
+//get the button list//
+var buttonsToChangeColor = document.querySelectorAll("button");
+
+//get the selected value of "id = background" dropdown list//
+var colorChangeOption = document.querySelector("#background");
+
+//Change the colors of button//
+colorChangeOption.addEventListener("change", () => {
+    if(colorChangeOption.value === "red"){
+        changeToRed();
+    }
+});
+
+function changeToRed(){
+    for (let index = 0; index < buttonsToChangeColor.length; index++) {
+        let colorClass = buttonsToChangeColor[index].classList;
+        colorClass.remove(colorClass[1]);
+        colorClass.add("btn-danger");
+    }
+}
