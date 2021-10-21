@@ -168,10 +168,40 @@ var colorChangeOption = document.querySelector("#background");
 colorChangeOption.addEventListener("change", () => {
     if(colorChangeOption.value === "red"){
         changeToRed();
+    }else if(colorChangeOption.value === "green"){
+        changeToGreen();
+    }else if(colorChangeOption.value === "random"){
+        changeToRandom();
+    }if(colorChangeOption.value === "reset"){
+        changeToReset();
     }
 });
 
 function changeToRed(){
+    for (let index = 0; index < buttonsToChangeColor.length; index++) {
+        let colorClass = buttonsToChangeColor[index].classList;
+        colorClass.remove(colorClass[1]);
+        colorClass.add("btn-danger");
+    }
+}
+
+function changeToGreen(){
+    for (let index = 0; index < buttonsToChangeColor.length; index++) {
+        let colorClass = buttonsToChangeColor[index].classList;
+        colorClass.remove(colorClass[1]);
+        colorClass.add("btn-success");
+    }
+}
+
+function changeToReset(){
+    for (let index = 0; index < buttonsToChangeColor.length; index++) {
+        let colorClass = buttonsToChangeColor[index].classList;
+        colorClass.remove(colorClass[1]);
+        colorClass.add("btn-danger");
+    }
+}
+
+function changeToRandom(){
     for (let index = 0; index < buttonsToChangeColor.length; index++) {
         let colorClass = buttonsToChangeColor[index].classList;
         colorClass.remove(colorClass[1]);
