@@ -57,3 +57,7 @@
 .result-message h2{
     margin: auto;
 }
+
+#background{
+    font-weight: bold;
+}

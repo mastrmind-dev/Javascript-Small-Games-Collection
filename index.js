@@ -164,6 +164,9 @@ var buttonsToChangeColor = document.querySelectorAll("button");
 //get the selected value of "id = background" dropdown list//
 var colorChangeOption = document.querySelector("#background");
 
+//store current colors of button to restore them later//
+const originalColor = originalColors();
+
 //Change the colors of button//
 colorChangeOption.addEventListener("change", () => {
     if(colorChangeOption.value === "red"){
@@ -176,6 +179,21 @@ colorChangeOption.addEventListener("change", () => {
         changeToReset();
     }
 });
+/**
+//make random selection to trigger "changeToRandom()" function on click//
+document.querySelector("#random").addEventListener('change', () => {
+    console.log("");
+    changeToRandom();
+}); */
+
+function originalColors(){
+        var storeOriginalColors = [];
+        for (let index = 0; index < buttonsToChangeColor.length; index++) {
+            let colorClass = buttonsToChangeColor[index].classList;
+            storeOriginalColors.push(colorClass[1]);
+    }
+    return storeOriginalColors;
+}
 
 function changeToRed(){
     for (let index = 0; index < buttonsToChangeColor.length; index++) {
@@ -193,11 +211,11 @@ function changeToGreen(){
     }
 }
 
-function changeToReset(){
+async function changeToReset(){
     for (let index = 0; index < buttonsToChangeColor.length; index++) {
         let colorClass = buttonsToChangeColor[index].classList;
         colorClass.remove(colorClass[1]);
-        colorClass.add("btn-danger");
+        colorClass.add(originalColor[index]);
     }
 }
 
@@ -205,6 +223,23 @@ function changeToRandom(){
     for (let index = 0; index < buttonsToChangeColor.length; index++) {
         let colorClass = buttonsToChangeColor[index].classList;
         colorClass.remove(colorClass[1]);
-        colorClass.add("btn-danger");
+        colorClass.add(randomColor());
     }
+}
+
+function randomColor(){
+    let randomNumber = Math.floor(Math.random() * 4);
+
+    if (randomNumber === 0) {
+        return "btn-danger";
+    }
+    else if (randomNumber === 1) {
+        return "btn-success";
+    }
+    else if (randomNumber === 2) {
+        return "btn-warning";
+    }
+    else if (randomNumber === 3) {
+        return "btn-primary";
+    } else{console.log("Error: No random color is generated!")}
 }
