@@ -1,4 +1,4 @@
-.container-1, .container-2, .container-3, .container-4{
+.container-1, .container-2, .container-3, .container-4, .container-5{
     text-align: center;
     width: 75%;
     margin: auto;
@@ -9,7 +9,7 @@
     border: 1px solid red;
 }
 
-.flex-box-container-1, .flex-box-rps, .flex-box-pick-color{
+.flex-box-container-1, .flex-box-rps, .flex-box-pick-color, .flex-blackjack-row-1, .flex-blackjack-row-2, .flex-blackjack-row-3{
     display: flex;
     border: 1px solid black;
     padding: 10px;
@@ -58,6 +58,34 @@
     margin: auto;
 }
 
-#background{
-    font-weight: bold;
+/*** blackjack css ***/
+.flex-blackjack-row-1{
+    background: url("img/blackjack\ background.jpg") center;
+    color: whitesmoke;
+    height: 70vh;
+}
+
+.flex-blackjack-row-1 div{
+    border: 2px solid black;
+    padding: 10px;
+    flex: 1;
+}
+
+.flex-blackjack-row-2{
+    background: rgb(105, 189, 20);
+}
+
+.flex-blackjack-row-2 div{
+    border: 1px solid black;
+    border-radius: 5px;
+    padding: 5px;
+}
+
+.flex-blackjack-row-2 button{
+    border: 1px solid black;
+}
+
+table, th, td{
+    border: 1px solid black;
+    padding: 5px;
 }
