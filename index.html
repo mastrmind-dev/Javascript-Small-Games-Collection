@@ -49,9 +49,9 @@
     <div class="container-3">
         <h2>Challenge 3: Rock, Paper, Scissors</h2>
         <div class="flex-box-rps shadowBlue" id="flex-box-rps-div">
-            <img src="img/rock.jpg" alt="rock" id="rock" class="rps-img" style="height: 150px; width: 150px;">
-            <img src="img/paper.png" alt="paper" id="paper" class="rps-img" style="height: 150px; width: 150px;">
-            <img src="img/scissor.png" alt="scissor" id="scissor" class="rps-img" style="height: 150px; width: 150px;">
+            <img src="assets/img/rock.jpg" alt="rock" id="rock" class="rps-img" style="height: 150px; width: 150px;">
+            <img src="assets/img/paper.png" alt="paper" id="paper" class="rps-img" style="height: 150px; width: 150px;">
+            <img src="assets/img/scissor.png" alt="scissor" id="scissor" class="rps-img" style="height: 150px; width: 150px;">
         </div>
         <div class="flex-box-container-1">
             <div class="rps-final-decision"></div>
@@ -84,7 +84,7 @@
         <h3 id="blackjack-result">Let's Play</h3>
 
         <!--player box and dealer box-->
-        <div id="flex-blackjack-row-1">
+        <div class="flex-blackjack-row-1">
             <div id="your-box">
                 <h3>Your Score : <span id="your-blackjack-result">0</span></h3>
             </div>
@@ -95,16 +95,16 @@
         </div>
 
         <!--play buttons-->
-        <div id="flex-blackjack-row-2">
+        <div class="flex-blackjack-row-2">
             <div id="play-buttons">
-                <button class="btn btn-primary btn-hit">Hit</button>
+                <button class="btn btn-primary btn-hit" id="df">Hit</button>
                 <button class="btn btn-warning btn-stand">Stand</button>
                 <button class="btn btn-danger btn-deal">Deal</button>
             </div>
         </div>
 
         <!--result table-->
-        <div id="flex-blackjack-row-3">
+        <div class="flex-blackjack-row-3">
             <div id="result-table">
                 <table>
                     <tr>

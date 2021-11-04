@@ -50,7 +50,7 @@ document.querySelector("#generate-cat-button").addEventListener('click', () => {
 //rock paper scissors/////////////////////////////////////////////////////////////////////////////
 
 var rpsImages = document.querySelectorAll(".rps-img");
-for(let i = 0; i < rpsImages.length; i++){
+for (let i = 0; i < rpsImages.length; i++) {
     rpsImages[i].addEventListener('click', async (e) => {
         await blink(rpsImages[i]);
         var s = await removeRpsResult();
@@ -69,29 +69,29 @@ function blink(image) {
             rpsImage.classList.add("shadowBlue");
             image.classList.remove("clicked");
         }, 200);
-        
-        resolve ("done");
+
+        resolve("done");
     })
 }
 
-function rpsGame(humanChoice){
+function rpsGame(humanChoice) {
     var botChoice = decideBotChoice();
     console.log(botChoice);
     var winner = decideWinner(botChoice, humanChoice);
     rpsFrontEnd(humanChoice, botChoice, winner);
 }
 
-function decideBotChoice(){
+function decideBotChoice() {
     var randomNumber = Math.floor(Math.random() * 3);
-    
+
     return ['rock', 'paper', 'scissor'][randomNumber];
 }
 
-function decideWinner(botChoice, humanChoice){
+function decideWinner(botChoice, humanChoice) {
     var gatherBothChoices = {
-        "rock" : {"rock" : .5, "paper" : 0, "scissor" : 1},
-        "paper" : {"rock" : 1, "paper" : .5, "scissor" : 0},
-        "scissor" : {"rock" : 0, "paper" : 1, "scissor" : .5}
+        "rock": { "rock": .5, "paper": 0, "scissor": 1 },
+        "paper": { "rock": 1, "paper": .5, "scissor": 0 },
+        "scissor": { "rock": 0, "paper": 1, "scissor": .5 }
     }
 
     var decisionScore = gatherBothChoices[humanChoice][botChoice];
@@ -101,45 +101,45 @@ function decideWinner(botChoice, humanChoice){
     return resultMessage;
 }
 
-function isWinner(decisionScore){
-    if(decisionScore === 1){
+function isWinner(decisionScore) {
+    if (decisionScore === 1) {
         return "You Won!";
-    } else if(decisionScore === .5){
+    } else if (decisionScore === .5) {
         return "Draw!";
-    } else{
+    } else {
         return "You Lost!";
     }
 }
 
-function rpsFrontEnd(humanChoice, botChoice, winner){
+function rpsFrontEnd(humanChoice, botChoice, winner) {
     showHumnChoice(humanChoice);
     showMessage(winner);
     showBotChoice(botChoice);
 }
 
-function showHumnChoice(humanChoice){
+function showHumnChoice(humanChoice) {
     var humanChoiceImg = document.createElement('img');
     humanChoiceImg.classList.add("col-md-3", "rps-result");
-    humanChoiceImg.setAttribute('src', 'img/' + humanChoice + ".png");
+    humanChoiceImg.setAttribute('src', 'assets/img/' + humanChoice + ".png");
     document.querySelector(".rps-final-decision").appendChild(humanChoiceImg);
 }
 
 function showBotChoice(botChoice) {
     var botChoiceImg = document.createElement('img');
     botChoiceImg.classList.add("col-md-3", "rps-result");
-    botChoiceImg.setAttribute('src', 'img/' + botChoice + ".png");
+    botChoiceImg.setAttribute('src', 'assets/img/' + botChoice + ".png");
     document.querySelector(".rps-final-decision").appendChild(botChoiceImg);
 }
 
-function showMessage(winner){
+function showMessage(winner) {
     let showResult = document.createElement('div');
-    if(winner === "Draw!"){
-    showResult.innerHTML = "<h2>" + winner +"</h2>"
-    } else{
-    showResult.innerHTML = "<h2>&larr;" + winner +"</h2>"
+    if (winner === "Draw!") {
+        showResult.innerHTML = "<h2>" + winner + "</h2>"
+    } else {
+        showResult.innerHTML = "<h2>&larr;" + winner + "</h2>"
     }
     showResult.classList.add("col-md-3", "rps-result", "result-message");
-    document.querySelector(".rps-final-decision").appendChild(showResult);   
+    document.querySelector(".rps-final-decision").appendChild(showResult);
 }
 
 function removeRpsResult() {
@@ -147,7 +147,7 @@ function removeRpsResult() {
         let rpsImages = document.getElementsByClassName("rps-result");
         console.log(rpsImages.length + "length")
         let rpsImagesAmount = rpsImages.length;
-        for(let i = 0; i < rpsImagesAmount; i++){
+        for (let i = 0; i < rpsImagesAmount; i++) {
             rpsImages[0].remove();
             console.log(i)
         }
@@ -169,13 +169,13 @@ const originalColor = originalColors();
 
 //Change the colors of button//
 colorChangeOption.addEventListener("change", () => {
-    if(colorChangeOption.value === "red"){
+    if (colorChangeOption.value === "red") {
         changeToRed();
-    }else if(colorChangeOption.value === "green"){
+    } else if (colorChangeOption.value === "green") {
         changeToGreen();
-    }else if(colorChangeOption.value === "random"){
+    } else if (colorChangeOption.value === "random") {
         changeToRandom();
-    }if(colorChangeOption.value === "reset"){
+    } if (colorChangeOption.value === "reset") {
         changeToReset();
     }
 });
@@ -186,16 +186,16 @@ document.querySelector("#random").addEventListener('change', () => {
     changeToRandom();
 }); */
 
-function originalColors(){
-        var storeOriginalColors = [];
-        for (let index = 0; index < buttonsToChangeColor.length; index++) {
-            let colorClass = buttonsToChangeColor[index].classList;
-            storeOriginalColors.push(colorClass[1]);
+function originalColors() {
+    var storeOriginalColors = [];
+    for (let index = 0; index < buttonsToChangeColor.length; index++) {
+        let colorClass = buttonsToChangeColor[index].classList;
+        storeOriginalColors.push(colorClass[1]);
     }
     return storeOriginalColors;
 }
 
-function changeToRed(){
+function changeToRed() {
     for (let index = 0; index < buttonsToChangeColor.length; index++) {
         let colorClass = buttonsToChangeColor[index].classList;
         colorClass.remove(colorClass[1]);
@@ -203,7 +203,7 @@ function changeToRed(){
     }
 }
 
-function changeToGreen(){
+function changeToGreen() {
     for (let index = 0; index < buttonsToChangeColor.length; index++) {
         let colorClass = buttonsToChangeColor[index].classList;
         colorClass.remove(colorClass[1]);
@@ -211,7 +211,7 @@ function changeToGreen(){
     }
 }
 
-async function changeToReset(){
+async function changeToReset() {
     for (let index = 0; index < buttonsToChangeColor.length; index++) {
         let colorClass = buttonsToChangeColor[index].classList;
         colorClass.remove(colorClass[1]);
@@ -219,7 +219,7 @@ async function changeToReset(){
     }
 }
 
-function changeToRandom(){
+function changeToRandom() {
     for (let index = 0; index < buttonsToChangeColor.length; index++) {
         let colorClass = buttonsToChangeColor[index].classList;
         colorClass.remove(colorClass[1]);
@@ -227,7 +227,7 @@ function changeToRandom(){
     }
 }
 
-function randomColor(){
+function randomColor() {
     let randomNumber = Math.floor(Math.random() * 4);
 
     if (randomNumber === 0) {
@@ -241,5 +241,59 @@ function randomColor(){
     }
     else if (randomNumber === 3) {
         return "btn-primary";
-    } else{console.log("Error: No random color is generated!")}
+    } else { console.error("Error: No random color is generated!") }
 }
+
+
+//=================================Blackjack Starts======================================//
+
+var blackJackGame = {
+    you: { scoreSpan: "#your-blackjack-result", div: "#your-box", score: 0 },
+    dealer: { scoreSpan: "#dealer-blackjack-result", div: "#dealer-box", score: 0 },
+};
+
+const you = blackJackGame.you;
+const dealer = blackJackGame.dealer;
+
+document.querySelector('.btn-hit').addEventListener('click', blackJackHit); //addEventListener doesn't want a function call, it just want a function name and then eventListener call to that function automatically
+
+document.querySelector(".btn-deal").addEventListener("click", blackJackDeal);
+
+function blackJackDeal(){
+    let cardImages = document.querySelector(".flex-blackjack-row-1").querySelectorAll("img"); //getElementsBy and querySelector methods output HTMlCollection and NodeList respectively. Those are collections of nodes, not arrays (look like arrays though). And those are live. That means if we remove or add some elements to / from a HTMLCollection or NodeList, they will be updated automatically by themselves.
+
+    //Defferece Between HTMlCollection and NodeList
+    /**HTMLCollection gives us id of the element as a reference to that element while NodeList doesn't.*/
+
+    //console.log(cardImages)
+    let cardImagesArray = Array.from(cardImages); //Since lists of nodes (HTMLCollection, NodeList) doesn't support for "forEach" loop and "map" method using this line we are converting cardImage list (of nodes) into an array of elements. An array of html elements is not live while it looks like a NodeList. 
+    //console.log(cardImagesArray)
+    let mapOututArray = cardImagesArray.map(cardImage => cardImage.remove());
+    //console.log(mapOututArray) // map method always outpus a new array of return values of parameter function. In this case since we reomve elements map method outputs an array of undefined elements.
+};
+
+async function blackJackHit() {
+    await playHitSound();
+    await showCard();
+}
+
+function showCard() {
+    return new Promise((resolve, reject) => {
+        let cardImage = document.createElement('img');
+        cardImage.style.height = "100px";
+        cardImage.style.weight = "100px";
+        cardImage.src = "./assets/img/paper.png";
+        document.querySelector(you.div).appendChild(cardImage);
+    });
+}
+
+function playHitSound() {
+    return new Promise((resolve, reject) => {
+        const hitSound = new Audio('./assets/sounds/swish.m4a');
+        hitSound.play();
+
+        resolve("done!");
+    });
+}
+
+//=================================Blackjack Ends======================================//
