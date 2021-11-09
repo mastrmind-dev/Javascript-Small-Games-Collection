@@ -250,6 +250,7 @@ function randomColor() {
 var blackJackGame = {
     you: { scoreSpan: "#your-blackjack-result", div: "#your-box", score: 0 },
     dealer: { scoreSpan: "#dealer-blackjack-result", div: "#dealer-box", score: 0 },
+    card: ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "A", "K", "Q", "J"],
 };
 
 const you = blackJackGame.you;
@@ -258,15 +259,16 @@ const dealer = blackJackGame.dealer;
 document.querySelector('.btn-hit').addEventListener('click', blackJackHit); //addEventListener doesn't want a function call, it just want a function name and then eventListener call to that function automatically
 
 document.querySelector(".btn-deal").addEventListener("click", blackJackDeal);
+document.querySelector(".btn-stand").addEventListener("click", blackJackStand);
 
 function blackJackDeal(){
-    let cardImages = document.querySelector(".flex-blackjack-row-1").querySelectorAll("img"); //getElementsBy and querySelector methods output HTMlCollection and NodeList respectively. Those are collections of nodes, not arrays (look like arrays though). And those are live. That means if we remove or add some elements to / from a HTMLCollection or NodeList, they will be updated automatically by themselves.
+    let cardImages = document.querySelector(".flex-blackjack-row-1").querySelectorAll("img"); //getElementsBy and querySelectorAll methods output HTMlCollection and NodeList respectively. Those are collections of nodes, not arrays (look like arrays though). And those are live (except the NodeList which is given by querySelectorAll, but other NodeLists are live. Eg -: document.getElementsByName). That means if we remove or add some elements to / from a HTMLCollection or NodeList, they will be updated automatically by themselves.
 
     //Defferece Between HTMlCollection and NodeList
     /**HTMLCollection gives us id of the element as a reference to that element while NodeList doesn't.*/
 
     //console.log(cardImages)
-    let cardImagesArray = Array.from(cardImages); //Since lists of nodes (HTMLCollection, NodeList) doesn't support for "forEach" loop and "map" method using this line we are converting cardImage list (of nodes) into an array of elements. An array of html elements is not live while it looks like a NodeList. 
+    let cardImagesArray = Array.from(cardImages); //Since lists of nodes (HTMLCollection, NodeList) doesn't support for "forEach" loop and "map" method using this line we are converting cardImage list (of nodes) into an array of elements. An array of html elements is not live while it looks like a NodeList. Or we can just use for loop instead of map. but map is easy no? 
     //console.log(cardImagesArray)
     let mapOututArray = cardImagesArray.map(cardImage => cardImage.remove());
     //console.log(mapOututArray) // map method always outpus a new array of return values of parameter function. In this case since we reomve elements map method outputs an array of undefined elements.
@@ -274,16 +276,25 @@ function blackJackDeal(){
 
 async function blackJackHit() {
     await playHitSound();
-    await showCard();
+    await showCard(you);
 }
 
-function showCard() {
+async function blackJackStand() {
+    await playHitSound();
+    await showCard(dealer);
+}
+
+function showCard(player) {
     return new Promise((resolve, reject) => {
         let cardImage = document.createElement('img');
         cardImage.style.height = "100px";
         cardImage.style.weight = "100px";
-        cardImage.src = "./assets/img/paper.png";
-        document.querySelector(you.div).appendChild(cardImage);
+        cardImage.style.padding = "0.5em";
+        let card = randomCard();
+        cardImage.src = `./assets/blackjack_images/${card}.png`;
+        document.querySelector(player.div).appendChild(cardImage);
+
+        resolve("done!");
     });
 }
 
@@ -294,6 +305,11 @@ function playHitSound() {
 
         resolve("done!");
     });
+}
+
+function randomCard(){
+    let randomNumber = Math.floor(Math.random() * 13);
+    return blackJackGame.card[randomNumber];
 }
 
 //=================================Blackjack Ends======================================//
