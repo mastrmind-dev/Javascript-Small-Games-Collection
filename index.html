@@ -1,130 +1,166 @@
 <!DOCTYPE html>
 <html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link
+			href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css"
+			rel="stylesheet"
+			integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU"
+			crossorigin="anonymous"
+		/>
+		<link
+			rel="stylesheet"
+			href="./modules/awesomeModal-main/css/AwesomeModal.css"
+		/>
+		<link
+			rel="stylesheet"
+			href="./modules/awesomeModal-main/css/AwesomeModal.css"
+		/>
+		<link rel="stylesheet" href="styles.css" />
+		<title>3 small games</title>
+	</head>
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
-    <link rel="stylesheet" href="styles.css">
-    <title>3 small games</title>
-</head>
+	<body>
+		<div class="container-1">
+			<h2>Challenge 1: Your Age in Days</h2>
+			<div class="flex-box-container-1">
+				<div>
+					<button class="btn btn-primary">Click me</button>
+				</div>
+				<div>
+					<button class="btn btn-danger">Reset</button>
+				</div>
+			</div>
 
-<body>
-    <div class="container-1">
-        <h2>Challenge 1: Your Age in Days</h2>
-        <div class="flex-box-container-1">
-            <div>
-                <button class="btn btn-primary">Click me</button>
-            </div>
-            <div>
-                <button class="btn btn-danger">Reset</button>
-            </div>
-        </div>
+			<div class="flex-box-container-1">
+				<div id="flex-box-result"></div>
+			</div>
+		</div>
 
-        <div class="flex-box-container-1">
-            <div id="flex-box-result">
+		<div class="container-2">
+			<h2>Challenge 2: cat generator</h2>
 
-            </div>
-        </div>
-    </div>
+			<div class="flex-box-container-1">
+				<div>
+					<button class="btn btn-success" id="generate-cat-button">
+						Generate Cat
+					</button>
+				</div>
+			</div>
+			<div class="flex-box-container-1">
+				<div>
+					<img src="" alt="cat" id="cat-image" />
+				</div>
+			</div>
+		</div>
 
-    <div class="container-2">
-        <h2>Challenge 2: cat generator</h2>
+		<div class="container-3">
+			<h2>Challenge 3: Rock, Paper, Scissors</h2>
+			<div class="flex-box-rps shadowBlue" id="flex-box-rps-div">
+				<img
+					src="assets/img/rock.jpg"
+					alt="rock"
+					id="rock"
+					class="rps-img"
+					style="height: 150px; width: 150px"
+				/>
+				<img
+					src="assets/img/paper.png"
+					alt="paper"
+					id="paper"
+					class="rps-img"
+					style="height: 150px; width: 150px"
+				/>
+				<img
+					src="assets/img/scissor.png"
+					alt="scissor"
+					id="scissor"
+					class="rps-img"
+					style="height: 150px; width: 150px"
+				/>
+			</div>
+			<div class="flex-box-container-1">
+				<div class="rps-final-decision"></div>
+			</div>
+		</div>
 
-        <div class="flex-box-container-1">
+		<div class="container-4">
+			<h2 id="change-my-color">Challenge 4: Change button color</h2>
+			<div class="flex-box-pick-color">
+				<form action="">
+					<select name="backdrop" id="background">
+						<option value="" style="color: rgb(146, 142, 142)">
+							Choose an option
+						</option>
+						<option value="random" id="random">Random</option>
+						<option value="red">Red</option>
+						<option value="green">Green</option>
+						<option value="reset">Reset</option>
+					</select>
+				</form>
 
-            <div>
-                <button class="btn btn-success" id="generate-cat-button">Generate Cat</button>
-            </div>
-        </div>
-        <div class="flex-box-container-1">
-            <div>
-                <img src="" alt="cat" id="cat-image">
-            </div>
-        </div>
-    </div>
+				<button class="btn btn-primary">Wee!</button>
+				<button class="btn btn-danger">Yahoo!</button>
+				<button class="btn btn-warning">Google!</button>
+				<button class="btn btn-success">Facebook!</button>
+			</div>
+		</div>
 
-    <div class="container-3">
-        <h2>Challenge 3: Rock, Paper, Scissors</h2>
-        <div class="flex-box-rps shadowBlue" id="flex-box-rps-div">
-            <img src="assets/img/rock.jpg" alt="rock" id="rock" class="rps-img" style="height: 150px; width: 150px;">
-            <img src="assets/img/paper.png" alt="paper" id="paper" class="rps-img" style="height: 150px; width: 150px;">
-            <img src="assets/img/scissor.png" alt="scissor" id="scissor" class="rps-img" style="height: 150px; width: 150px;">
-        </div>
-        <div class="flex-box-container-1">
-            <div class="rps-final-decision"></div>
-        </div>
-    </div>
+		<!--=============Start Blackjack Challenge===============-->
+		<div class="container-5">
+			<h2>Challenge 5: Blackjack</h2>
+			<h3 id="blackjack-result">Let's Play</h3>
 
-    <div class="container-4">
-        <h2 id="change-my-color">Challenge 4: Change button color</h2>
-        <div class="flex-box-pick-color">
-            <form action="">
-                <select name="backdrop" id="background">
-                    <option value="" style="color: rgb(146, 142, 142);">Choose an option</option>
-                    <option value="random" id="random">Random</option>
-                    <option value="red">Red</option>
-                    <option value="green">Green</option>
-                    <option value="reset">Reset</option>
-                </select>
-            </form>
+			<!--player box and dealer box-->
+			<div class="flex-blackjack-row-1">
+				<div id="your-box">
+					<h3>Your Score : <span id="your-blackjack-result">0</span></h3>
+				</div>
 
-            <button class="btn btn-primary">Wee!</button>
-            <button class="btn btn-danger">Yahoo!</button>
-            <button class="btn btn-warning">Google!</button>
-            <button class="btn btn-success">Facebook!</button>
-        </div>
-    </div>
+				<div id="dealer-box">
+					<h3>Dealer Score : <span id="dealer-blackjack-result">0</span></h3>
+				</div>
+			</div>
 
-    <!--Start Blackjack Challenge-->
-    <div class="container-5">
-        <h2>Challenge 5: Blackjack</h2>
-        <h3 id="blackjack-result">Let's Play</h3>
+			<!--play buttons-->
+			<div class="flex-blackjack-row-2">
+				<div id="play-buttons">
+					<button class="btn btn-primary btn-hit">Hit</button>
+					<button class="btn btn-warning btn-stand">Stand</button>
+					<button class="btn btn-danger btn-deal">Deal</button>
+				</div>
+			</div>
 
-        <!--player box and dealer box-->
-        <div class="flex-blackjack-row-1">
-            <div id="your-box">
-                <h3>Your Score : <span id="your-blackjack-result">0</span></h3>
-            </div>
+			<!--result table-->
+			<div class="flex-blackjack-row-3">
+				<div id="result-table">
+					<table>
+						<tr>
+							<th>Wins</th>
+							<th>Losses</th>
+							<th>Draws</th>
+						</tr>
 
-            <div id="dealer-box">
-                <h3>Dealer Score : <span id="dealer-blackjack-result">0</span></h3>
-            </div>
-        </div>
+						<tr>
+							<td id="wins">0</td>
+							<td id="losses">0</td>
+							<td id="draws">0</td>
+						</tr>
+					</table>
+				</div>
+			</div>
+			<!--Modal-->
+			<div class="awesomeModal row" hidden>
+				<h2>You have got Ace!</h2>
+				<h4>Do you select one or eleven as the value?</h4>
+				<button class="btn btn-warning" value=1>01</button>
+				<button class="btn btn-primary" value=11>11</button>
+			</div>
+		</div>
+		<!--===============End Blackjack Challenge=================-->
 
-        <!--play buttons-->
-        <div class="flex-blackjack-row-2">
-            <div id="play-buttons">
-                <button class="btn btn-primary btn-hit">Hit</button>
-                <button class="btn btn-warning btn-stand">Stand</button>
-                <button class="btn btn-danger btn-deal">Deal</button>
-            </div>
-        </div>
-
-        <!--result table-->
-        <div class="flex-blackjack-row-3">
-            <div id="result-table">
-                <table>
-                    <tr>
-                        <th>Wins</th>
-                        <th>Losses</th>
-                        <th>Draws</th>
-                    </tr>
-
-                    <tr>
-                        <td id="wins">0</td>
-                        <td id="losses">0</td>
-                        <td id="draws">0</td>
-                    </tr>
-                </table>
-            </div>
-        </div>
-    </div>
-    <!--End Blackjack Challenge-->
-
-    <script src="index.js"></script>
-</body>
-
+		<script src="index.js" type="module"></script>
+	</body>
 </html>

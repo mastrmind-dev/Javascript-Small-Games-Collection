@@ -1,3 +1,5 @@
+import AwesomeModal from './modules/awesomeModal-main/AwesomeModal.js';
+
 document.querySelector("button").addEventListener("click", () => {
     if (document.querySelector("#ageInDays") === null) {
         var birthYear = prompt("What year were you born... Good Friend?");
@@ -38,9 +40,7 @@ document.querySelector("#generate-cat-button").addEventListener('click', () => {
         document.getElementById("cat-image").setAttribute("src", data[0].url);
         document.querySelector("#cat-image").style.visibility = "visible";
         document.querySelector("#cat-image").addEventListener("load", (e) => {
-            if (e.returnValue === true) {
                 document.querySelector("#generate-cat-button").innerText = "Generate Another Cat";
-            }
         });
 
     });
@@ -250,7 +250,8 @@ function randomColor() {
 var blackJackGame = {
     you: { scoreSpan: "#your-blackjack-result", div: "#your-box", score: 0 },
     dealer: { scoreSpan: "#dealer-blackjack-result", div: "#dealer-box", score: 0 },
-    card: ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "A", "K", "Q", "J"],
+    card: ["2", "3", "4", "5", "6", "7", "8", "9", "10", "A", "K", "Q", "J"],
+    cardValue: { "2": 2, "3": 3, "4": 4, "5": 5, "6": 6, "7": 7, "8": 8, "9": 9, "10": 10, "A": [1, 11], "K": 10, "Q": 10, "J": 10 },
 };
 
 const you = blackJackGame.you;
@@ -261,7 +262,7 @@ document.querySelector('.btn-hit').addEventListener('click', blackJackHit); //ad
 document.querySelector(".btn-deal").addEventListener("click", blackJackDeal);
 document.querySelector(".btn-stand").addEventListener("click", blackJackStand);
 
-function blackJackDeal(){
+function blackJackDeal() {
     let cardImages = document.querySelector(".flex-blackjack-row-1").querySelectorAll("img"); //getElementsBy and querySelectorAll methods output HTMlCollection and NodeList respectively. Those are collections of nodes, not arrays (look like arrays though). And those are live (except the NodeList which is given by querySelectorAll, but other NodeLists are live. Eg -: document.getElementsByName). That means if we remove or add some elements to / from a HTMLCollection or NodeList, they will be updated automatically by themselves.
 
     //Defferece Between HTMlCollection and NodeList
@@ -272,6 +273,15 @@ function blackJackDeal(){
     //console.log(cardImagesArray)
     let mapOututArray = cardImagesArray.map(cardImage => cardImage.remove());
     //console.log(mapOututArray) // map method always outpus a new array of return values of parameter function. In this case since we reomve elements map method outputs an array of undefined elements.
+
+    let scores = document.querySelector(".flex-blackjack-row-1").querySelectorAll("span");
+    scores.forEach(score => {
+        score.textContent = 0;
+    });
+    you.score = 0;
+    dealer.score = 0;
+
+    cardNo = -1; //has defined at the begining of showCard() and has used in it
 };
 
 async function blackJackHit() {
@@ -284,15 +294,19 @@ async function blackJackStand() {
     await showCard(dealer);
 }
 
+var cardNo = -1;
 function showCard(player) {
     return new Promise((resolve, reject) => {
+        cardNo++;
         let cardImage = document.createElement('img');
+        cardImage.setAttribute("class", "cardImage");
         cardImage.style.height = "100px";
         cardImage.style.weight = "100px";
         cardImage.style.padding = "0.5em";
         let card = randomCard();
         cardImage.src = `./assets/blackjack_images/${card}.png`;
         document.querySelector(player.div).appendChild(cardImage);
+        showScore(card, player, cardNo);
 
         resolve("done!");
     });
@@ -307,9 +321,52 @@ function playHitSound() {
     });
 }
 
-function randomCard(){
+function randomCard() {
     let randomNumber = Math.floor(Math.random() * 13);
     return blackJackGame.card[randomNumber];
 }
+
+function showScore(card, player, cardNo) {
+    document.querySelectorAll(".cardImage")[cardNo].addEventListener('load', async (e) => {
+        if (true) {
+            if (card === "A") {
+                let value = await selectValueForA();
+                player.score += value;
+                document.querySelector(player.scoreSpan).textContent = player.score;
+            } else {
+                player.score += blackJackGame.cardValue[card];
+                document.querySelector(player.scoreSpan).textContent = player.score;
+            }
+        }
+    });
+}
+
+function selectValueForA() {
+    return new Promise((resolve, reject) => {
+        let myModal = new AwesomeModal('.awesomeModal');
+        myModal.open();
+
+        document.querySelector(".awesomeModal").removeAttribute("hidden");
+
+        let firstButton = document.querySelectorAll(".awesomeModal button")[0];
+        firstButton.addEventListener("click", () => {
+            myModal.close();
+            //resolve(firstButton.value);
+            resolve(blackJackGame.cardValue["A"][0]);
+        });
+        let secondButton = document.querySelectorAll(".awesomeModal button")[1];
+        secondButton.addEventListener('click', () => {
+            myModal.close();
+            //resolve(secondButton.value);
+            resolve(blackJackGame.cardValue["A"][1]);
+        });
+    });
+}
+
+
+// // document.addEventListener("DOMContentLoaded", () => {
+// //     let myModal = new AwesomeModal('.awesomeModal');
+// //     myModal.open();
+// // });
 
 //=================================Blackjack Ends======================================//
