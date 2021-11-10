@@ -92,6 +92,7 @@ table, th, td{
 
 .awesomeModal{
     background: whitesmoke;
+    margin-top: 5%;
     padding: 1em;
     border: 4px solid rgb(40, 170, 202);
     border-radius: 25px;
