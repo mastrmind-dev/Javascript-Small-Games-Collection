@@ -270,12 +270,11 @@ var scores = document.querySelector(".flex-blackjack-row-1 span");
 const config = {childList: true};
 
 const busted = function (mutationList, observer){
-    console.log('click')
     if (parseInt(scores.textContent) > 21) {
-        let s = document.createElement('h2');
-        s.textContent = 'BUSTED!';
-        scoreResults[0].before(s);
-        console.log('some')
+        const bustedMessage = document.createElement('h2');
+        bustedMessage.textContent = 'BUSTED!';
+        scoreResults[0].before(bustedMessage);
+        hitButton.setAttribute('disabled', 'true');
     }
 }
 
@@ -303,6 +302,8 @@ function blackJackDeal() {
     dealer.score = 0;
 
     cardNo = -1; //has defined at the begining of showCard() and has used in it
+
+    hitButton.setAttribute('disabled', 'false');
 };
 
 async function blackJackHit() {
