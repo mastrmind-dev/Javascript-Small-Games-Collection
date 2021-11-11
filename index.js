@@ -257,10 +257,31 @@ var blackJackGame = {
 const you = blackJackGame.you;
 const dealer = blackJackGame.dealer;
 
-document.querySelector('.btn-hit').addEventListener('click', blackJackHit); //addEventListener doesn't want a function call, it just want a function name and then eventListener call to that function automatically
+var hitButton = document.querySelector('.btn-hit');
+hitButton.addEventListener('click', blackJackHit); //addEventListener doesn't want a function call, it just want a function name and then eventListener call to that function automatically
 
 document.querySelector(".btn-deal").addEventListener("click", blackJackDeal);
 document.querySelector(".btn-stand").addEventListener("click", blackJackStand);
+
+//disable hit-button if you are busted////////////
+var scoreResults = document.querySelectorAll(".flex-blackjack-row-1 h3");
+var scores = document.querySelector(".flex-blackjack-row-1 span");
+
+const config = {childList: true};
+
+const busted = function (mutationList, observer){
+    console.log('click')
+    if (parseInt(scores.textContent) > 21) {
+        let s = document.createElement('h2');
+        s.textContent = 'BUSTED!';
+        scoreResults[0].before(s);
+        console.log('some')
+    }
+}
+
+const observer = new MutationObserver(busted);
+observer.observe(scores, config);
+///////////////////////////////////////////////////
 
 function blackJackDeal() {
     let cardImages = document.querySelector(".flex-blackjack-row-1").querySelectorAll("img"); //getElementsBy and querySelectorAll methods output HTMlCollection and NodeList respectively. Those are collections of nodes, not arrays (look like arrays though). And those are live (except the NodeList which is given by querySelectorAll, but other NodeLists are live. Eg -: document.getElementsByName). That means if we remove or add some elements to / from a HTMLCollection or NodeList, they will be updated automatically by themselves.
@@ -328,7 +349,6 @@ function randomCard() {
 
 function showScore(card, player, cardNo) {
     document.querySelectorAll(".cardImage")[cardNo].addEventListener('load', async (e) => {
-        if (true) {
             if (card === "A") {
                 let value = await selectValueForA();
                 player.score += value;
@@ -338,7 +358,7 @@ function showScore(card, player, cardNo) {
                 document.querySelector(player.scoreSpan).textContent = player.score;
             }
         }
-    });
+    );
 }
 
 function selectValueForA() {
@@ -362,7 +382,6 @@ function selectValueForA() {
         });
     });
 }
-
 
 // // document.addEventListener("DOMContentLoaded", () => {
 // //     let myModal = new AwesomeModal('.awesomeModal');
