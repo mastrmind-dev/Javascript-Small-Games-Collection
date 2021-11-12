@@ -269,10 +269,11 @@ var scores = document.querySelector(".flex-blackjack-row-1 span");
 
 const config = {childList: true};
 
+const bustedMessage = document.createElement('h2');
+bustedMessage.textContent = 'BUSTED!';
+
 const busted = function (mutationList, observer){
     if (parseInt(scores.textContent) > 21) {
-        const bustedMessage = document.createElement('h2');
-        bustedMessage.textContent = 'BUSTED!';
         scoreResults[0].before(bustedMessage);
         hitButton.setAttribute('disabled', 'true');
     }
@@ -303,8 +304,9 @@ function blackJackDeal() {
 
     cardNo = -1; //has defined at the begining of showCard() and has used in it
 
-    hitButton.setAttribute('disabled', 'false');
-};
+    hitButton.removeAttribute('disabled');
+    bustedMessage.remove();
+}
 
 async function blackJackHit() {
     await playHitSound();
