@@ -275,7 +275,7 @@ bustedMessage.textContent = 'BUSTED!';
 const busted = function (mutationList, observer){
     if (parseInt(scores.textContent) > 21) {
         scoreResults[0].before(bustedMessage);
-        hitButton.setAttribute('disabled', 'true');
+        hitButton.setAttribute('disabled', 'true');//if the given value is 'false' it doesn't matter. Because if we add an attribute which gives boolean values, its default value will be set to 'true', we can not change it. But we have to give some value to this attribute otherwise erros will be generated becase setAtrribute method needs two arguments.
     }
 }
 
@@ -304,7 +304,10 @@ function blackJackDeal() {
 
     cardNo = -1; //has defined at the begining of showCard() and has used in it
 
+    //hitButton.setAttribute('disabled', 'false'); // This is not working because these attributes are giving boolean values. And they can not be updated. So we have to remove them when we don't want them, which is done in the following line.
     hitButton.removeAttribute('disabled');
+
+    //remove the busted message
     bustedMessage.remove();
 }
 
