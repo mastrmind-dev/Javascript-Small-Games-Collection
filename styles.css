@@ -1,15 +1,24 @@
-.container-1, .container-2, .container-3, .container-4, .container-5{
+.container-1,
+.container-2,
+.container-3,
+.container-4,
+.container-5 {
     text-align: center;
     width: 75%;
     margin: auto;
     border: 1px solid black;
 }
 
-.container-2{
+.container-2 {
     border: 1px solid red;
 }
 
-.flex-box-container-1, .flex-box-rps, .flex-box-pick-color, .flex-blackjack-row-1, .flex-blackjack-row-2, .flex-blackjack-row-3{
+.flex-box-container-1,
+.flex-box-rps,
+.flex-box-pick-color,
+.flex-blackjack-row-1,
+.flex-blackjack-row-2,
+.flex-blackjack-row-3 {
     display: flex;
     border: 1px solid black;
     padding: 10px;
@@ -18,79 +27,81 @@
     justify-content: space-around;
 }
 
-.flex-box-container-1 div{
+.flex-box-container-1 div {
     display: flex;
     padding: 10px;
     border: 1px solid black;
     align-items: center;
 }
 
-#cat-image{
+#cat-image {
     max-width: 50%;
     height: auto;
     margin: auto;
     visibility: hidden;
 }
 
-.flex-box-rps img{
+.flex-box-rps img {
     width: 150px;
     height: 150px;
 }
 
-.shadowBlue img:hover{
+.shadowBlue img:hover {
     box-shadow: 0px 10px 50px rgba(37, 50, 233, 1);
 }
 
-.clicked{
+.clicked {
     box-shadow: 0px 10px 50px red;
 }
 
-.rps-result{
+.rps-result {
     width: 150px;
     height: 150px;
 }
 
-.result-message{
+.result-message {
     background: tomato;
 }
 
-.result-message h2{
+.result-message h2 {
     margin: auto;
 }
 
 /*** blackjack css ***/
-.flex-blackjack-row-1{
+.flex-blackjack-row-1 {
     background: url("assets/img/blackjack\ background.jpg") center;
     color: whitesmoke;
     height: 70vh;
 }
 
-.flex-blackjack-row-1 div{
+.flex-blackjack-row-1 div {
     border: 2px solid black;
     padding: 10px;
     flex: 1;
 }
 
-.flex-blackjack-row-2{
+.flex-blackjack-row-2 {
     background: rgb(105, 189, 20);
 }
 
-.flex-blackjack-row-2 div{
+.flex-blackjack-row-2 div {
     border: 1px solid black;
     border-radius: 5px;
     padding: 5px;
 }
 
-.flex-blackjack-row-2 button{
+.flex-blackjack-row-2 button {
     border: 1px solid black;
 }
 
-table, th, td{
+table,
+th,
+td {
     border: 1px solid black;
     padding: 5px;
 }
 
-.awesomeModal{
+.awesomeModal {
     background: whitesmoke;
     margin-top: 5%;
     padding: 1em;
@@ -100,7 +111,32 @@ table, th, td{
     text-align: center;
 }
 
-.awesomeModal button{
+.awesomeModal button {
     width: fit-content !important;
     margin: auto;
+}
+
+@media screen and (max-width: 515px) {
+    #play-buttons {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-around;
+    }
+
+    .btn {
+        margin-top: 0.3em;
+    }
+
+    .btn-hit {
+        order: 1;
+    }
+
+    .btn-stand {
+        order: 2;
+    }
+
+    .btn-deal {
+        order: 3;
+    }
 }
