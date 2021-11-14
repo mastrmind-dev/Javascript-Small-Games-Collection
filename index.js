@@ -282,8 +282,10 @@ const busted = function (mutationList, observer){
             
             if(scores[index].id === "your-blackjack-result"){
                 document.querySelector("#blackjack-result").textContent = "You Lost!";
+                playLostSound();
             } else if(scores[index].id === "dealer-blackjack-result"){
                 document.querySelector("#blackjack-result").textContent = "You Won!";
+                playWinSound();         
             }
         }
     }
@@ -364,6 +366,16 @@ function playHitSound() {
 
         resolve("done!");
     });
+}
+
+function playLostSound(){
+    const lostSound = new Audio('./assets/sounds/aww.mp3');
+    lostSound.play();
+}
+
+function playWinSound(){
+    const winSound = new Audio('./assets/sounds/cash.mp3')
+    winSound.play();
 }
 
 function randomCard() {
