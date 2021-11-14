@@ -351,7 +351,7 @@ function showCard(player) {
         cardImage.style.weight = "100px";
         cardImage.style.padding = "0.5em";
         let card = randomCard();
-        cardImage.src = `./assets/blackjack_images/${card}.png`;
+        cardImage.src = `./assets/blackjack_images/${card}.PNG`;
         document.querySelector(player.div).appendChild(cardImage);
         showScore(card, player, cardNo);
 
