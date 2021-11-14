@@ -261,11 +261,12 @@ var hitButton = document.querySelector('.btn-hit');
 hitButton.addEventListener('click', blackJackHit); //addEventListener doesn't want a function call, it just want a function name and then eventListener call to that function automatically
 
 document.querySelector(".btn-deal").addEventListener("click", blackJackDeal);
-document.querySelector(".btn-stand").addEventListener("click", blackJackStand);
+var standButton = document.querySelector(".btn-stand");
+standButton.addEventListener("click", blackJackStand);
 
 //disable hit-button if you are busted////////////
 var scoreResults = document.querySelectorAll(".flex-blackjack-row-1 h3");
-var scores = document.querySelector(".flex-blackjack-row-1 span");
+var scores = document.querySelectorAll(".flex-blackjack-row-1 span");
 
 const config = {childList: true};
 
@@ -273,14 +274,19 @@ const bustedMessage = document.createElement('h2');
 bustedMessage.textContent = 'BUSTED!';
 
 const busted = function (mutationList, observer){
-    if (parseInt(scores.textContent) > 21) {
-        scoreResults[0].before(bustedMessage);
-        hitButton.setAttribute('disabled', 'true');//if the given value is 'false' it doesn't matter. Because if we add an attribute which gives boolean values, its default value will be set to 'true', we can not change it. But we have to give some value to this attribute otherwise erros will be generated becase setAtrribute method needs two arguments.
+    for (let index = 0; index < scoreResults.length; index++) {
+        if (parseInt(scores[index].textContent) > 21) {
+            scoreResults[index].before(bustedMessage);
+            hitButton.setAttribute('disabled', 'true');//if the given value is 'false' it doesn't matter. Because if we add an attribute which gives boolean values, its default value will be set to 'true', we can not change it. But we have to give some value to this attribute otherwise erros will be generated becase setAtrribute method needs two arguments.
+            standButton.setAttribute('disabled', 'true');
+        }
     }
 }
 
 const observer = new MutationObserver(busted);
-observer.observe(scores, config);
+scores.forEach(score => {
+    observer.observe(score, config);
+});
 ///////////////////////////////////////////////////
 
 function blackJackDeal() {
@@ -306,6 +312,7 @@ function blackJackDeal() {
 
     //hitButton.setAttribute('disabled', 'false'); // This is not working because these attributes are giving boolean values. And they can not be updated. So we have to remove them when we don't want them, which is done in the following line.
     hitButton.removeAttribute('disabled');
+    standButton.removeAttribute('disabled');
 
     //remove the busted message
     bustedMessage.remove();
