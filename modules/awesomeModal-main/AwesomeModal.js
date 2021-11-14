@@ -12,7 +12,7 @@ export default class AwesomeModal {
         this.overlay = null;
         this.overlayClass = config.overlayClass ? "awesomeModal__overlay " + config.overlayClass : "awesomeModal__overlay";
         this.overlayBackground = config.overlayBackground ? config.overlayBackground : 'rgba(0,0,0,.1)';
-        this.overlayCloseAbleDisabled = config.overlayCloseAbleDisabled ? config.overlayCloseAbleDisabled : false;
+        this.overlayCloseAbleDisabled = config.overlayCloseAbleDisabled ? config.overlayCloseAbleDisabled : true;
         this.modalAnimateDisabled = config.modalAnimateDisabled ? config.modalAnimateDisabled : false;
         this.ANIMATION_DURATION = 200;
 

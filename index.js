@@ -279,6 +279,12 @@ const busted = function (mutationList, observer){
             scoreResults[index].before(bustedMessage);
             hitButton.setAttribute('disabled', 'true');//if the given value is 'false' it doesn't matter. Because if we add an attribute which gives boolean values, its default value will be set to 'true', we can not change it. But we have to give some value to this attribute otherwise erros will be generated becase setAtrribute method needs two arguments.
             standButton.setAttribute('disabled', 'true');
+            
+            if(scores[index].id === "your-blackjack-result"){
+                document.querySelector("#blackjack-result").textContent = "You Lost!";
+            } else if(scores[index].id === "dealer-blackjack-result"){
+                document.querySelector("#blackjack-result").textContent = "You Won!";
+            }
         }
     }
 }
@@ -290,6 +296,8 @@ scores.forEach(score => {
 ///////////////////////////////////////////////////
 
 function blackJackDeal() {
+    updateBJTable();
+
     let cardImages = document.querySelector(".flex-blackjack-row-1").querySelectorAll("img"); //getElementsBy and querySelectorAll methods output HTMlCollection and NodeList respectively. Those are collections of nodes, not arrays (look like arrays though). And those are live (except the NodeList which is given by querySelectorAll, but other NodeLists are live. Eg -: document.getElementsByName). That means if we remove or add some elements to / from a HTMLCollection or NodeList, they will be updated automatically by themselves.
 
     //Defferece Between HTMlCollection and NodeList
@@ -316,6 +324,8 @@ function blackJackDeal() {
 
     //remove the busted message
     bustedMessage.remove();
+
+    document.querySelector("#blackjack-result").textContent = "Let's Play";
 }
 
 async function blackJackHit() {
@@ -328,12 +338,13 @@ async function blackJackStand() {
     await showCard(dealer);
 }
 
-var cardNo = -1;
+var cardNo = 0;
 function showCard(player) {
     return new Promise((resolve, reject) => {
         cardNo++;
         let cardImage = document.createElement('img');
         cardImage.setAttribute("class", "cardImage");
+        cardImage.setAttribute("id", `img${cardNo}`);
         cardImage.style.height = "100px";
         cardImage.style.weight = "100px";
         cardImage.style.padding = "0.5em";
@@ -361,7 +372,8 @@ function randomCard() {
 }
 
 function showScore(card, player, cardNo) {
-    document.querySelectorAll(".cardImage")[cardNo].addEventListener('load', async (e) => {
+    console.log(cardNo)
+    document.querySelector(`#img${cardNo}`).addEventListener('load', async (e) => {
             if (card === "A") {
                 let value = await selectValueForA();
                 player.score += value;
@@ -394,6 +406,42 @@ function selectValueForA() {
             resolve(blackJackGame.cardValue["A"][1]);
         });
     });
+}
+
+function decideBJWinner(){
+    var isYouWinner = null;
+    if((you.score <= 21 && you.score > dealer.score) || (you.score <= 21 && dealer.score > 21)){
+        isYouWinner = true;
+    } else if((you.score < dealer.score && dealer.score <= 21) || (you.score > 21 && dealer.score <= 21)){
+        isYouWinner = false;
+    } else{
+    }
+
+    return isYouWinner;
+}
+
+function updateBJTable(){
+    let didYouWin = decideBJWinner();
+    
+    if(didYouWin === true){
+        let winsCell = document.querySelector("#wins");
+        let wins = parseInt(winsCell.textContent);
+        wins += 1;
+
+        winsCell.innerText = wins;
+    } else if(didYouWin === false){
+        let lossesCell = document.querySelector("#losses");
+        let losses = parseInt(lossesCell.textContent);
+        losses += 1;
+
+        lossesCell.innerText = losses;
+    } else{
+        let drawsCell = document.querySelector("#draws");
+        let draws = parseInt(drawsCell.textContent);
+        draws += 1;
+
+        drawsCell.innerText = draws;    
+    }
 }
 
 // // document.addEventListener("DOMContentLoaded", () => {
