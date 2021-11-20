@@ -288,8 +288,8 @@ var scoreResults = document.querySelectorAll(".flex-blackjack-row-1 h3");
 var scores = document.querySelectorAll(".flex-blackjack-row-1 span");
 
 var closeWarningModal = document.querySelector(".warningModal button");
-closeWarningModal.addEventListener('click', () => {
-    warningModal.close();
+closeWarningModal.addEventListener("click", () => {
+  warningModal.close();
 });
 
 const config = { childList: true };
@@ -366,7 +366,7 @@ var dealerScoreGlobal;
 var warningModal;
 async function blackJackStand() {
   let isNotHitPressed =
-    (document.querySelector("#your-blackjack-result").textContent === "0");
+    document.querySelector("#your-blackjack-result").textContent === "0";
 
   if (isNotHitPressed) {
     warningModal = new AwesomeModal(".warningModal");
@@ -374,8 +374,7 @@ async function blackJackStand() {
 
     document.querySelector(".warningModal").removeAttribute("hidden");
   } else {
-    hitButton.setAttribute('disabled', 'true');
-    await playHitSound();
+    hitButton.setAttribute("disabled", "true");
 
     dealerScoreGlobal = dealer.score;
     while (dealerScoreGlobal < 21) {
@@ -391,9 +390,11 @@ function winnerOnPoints() {
   if (didYouWin) {
     document.querySelector("#blackjack-result").textContent = "You Won!";
     playWinSound();
-  } else {
+  } else if (didYouWin === false) {
     document.querySelector("#blackjack-result").textContent = "You Lost!";
     playLostSound();
+  } else {
+    document.querySelector("#blackjack-result").textContent = "Draw!";
   }
 }
 
@@ -419,7 +420,8 @@ async function showCard(player) {
 }
 
 function generateCard(card, cardNo, player) {
-  return new Promise((resolve) => {
+  return new Promise(async (resolve) => {
+    await playHitSound();
     let cardImage = document.createElement("img");
     cardImage.setAttribute("class", "cardImage");
     cardImage.setAttribute("id", `img${cardNo}`);
@@ -429,7 +431,7 @@ function generateCard(card, cardNo, player) {
     cardImage.src = `https://raw.githubusercontent.com/mastrmind-dev/Javascript-Small-Games-Collection/main/assets/blackjack_Images/${card}.png`;
     document.querySelector(player.div).appendChild(cardImage);
     setTimeout(() => {
-        
+      //to keep time gaps between showing two cards
     }, 500);
     resolve("done!");
   });
