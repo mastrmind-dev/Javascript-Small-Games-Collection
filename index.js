@@ -359,7 +359,6 @@ function blackJackDeal() {
 }
 
 async function blackJackHit() {
-  await playHitSound();
   await showCard(you);
 }
 var dealerScoreGlobal;
