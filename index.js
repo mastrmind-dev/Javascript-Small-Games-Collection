@@ -276,11 +276,11 @@ var blackJackGame = {
 const you = blackJackGame.you;
 const dealer = blackJackGame.dealer;
 
-var hitButton = document.querySelector(".btn-hit");
+var hitButton = document.querySelector("#btn-hit");
 hitButton.addEventListener("click", blackJackHit); //addEventListener doesn't want a function call, it just want a function name and then eventListener call to that function automatically
 
-document.querySelector(".btn-deal").addEventListener("click", blackJackDeal);
-var standButton = document.querySelector(".btn-stand");
+document.querySelector("#btn-deal").addEventListener("click", blackJackDeal);
+var standButton = document.querySelector("#btn-stand");
 standButton.addEventListener("click", blackJackStand);
 
 //disable hit-button if you are busted////////////
